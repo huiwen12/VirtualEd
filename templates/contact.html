@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Contact
+{% endblock %}
+
+{% block main %}
+<h1>Contact Us</h1>
+
+<p>Feel free to contact us with any inquiries!</p>
+
+<form action="/contact" method="post">
+    <input name="name" placeholder="Name" type="text" required>
+    <input name="email" placeholder="Email" type="text" required>
+    <input name="email_message" placeholder="Message" type="text" required>
+    <input type="submit">
+</form>
+{% endblock %}

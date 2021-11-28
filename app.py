@@ -106,7 +106,18 @@ def upload():
 
     else:
         return redirect("/")
-    
+
+
+@app.route("/contact", methods=["POST"])
+def contact():
+    name = request.form.get("name")
+    email = request.form.get("email")
+    email_message = request.form.get("email_message")
+    if not name or not email or not email_message:
+        return render_template("error.html")
+
+    message = Message(email_message, recipients=["hchen@college.harvard.edu"])
+    mail.send(message)
 
 
 def errorhandler(e):
