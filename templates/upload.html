@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Upload
+{% endblock %}
+
+{% block main %}
+<h1>Upload your course materials</h1>
+
+<form action="/upload" method="post">
+    <input name="name" placeholder="Name" type="text" required>
+    <input name="email" placeholder="Email" type="text" required>
+    <input name="course_title" placeholder="Course Title" type="text" required>
+    {% for subject in subjects %}
+        <input name="subject" type="radio" value="{{ subject }}"> {{ subject }}
+    {% endfor %}
+    <input name="description" placeholder="Description" type="text" required>
+    <input name="syllabus" placeholder="Syllabus" type="text" required>
+    <input name="pset" placeholder="Problem Set" type="text">
+    <input name="other" placeholder="Other Materials" type="text">
+    <input type="submit">
+</form>
+{% endblock %}
