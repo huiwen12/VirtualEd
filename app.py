@@ -65,10 +65,14 @@ def after_request(response):
     return response
 
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def home():
     """Show home page"""
-    return render_template("home.html")
+    if request.method == "POST":
+        return redirect("/upload")
+
+    else:
+        return render_template("home.html")
 
 
 # Upload 
