@@ -5,8 +5,28 @@ Home
 {% endblock %}
 
 {% block main %}
+<!-- Jumbotron -->
+<div
+  class="bg-image p-5 text-center shadow-1-strong rounded mb-5 text-white"
+  style="background-image: url('../static/student_photo.jpg');"
+>
+  <h1>We are VirtualEd.</h1>
+
+  <p>
+    A community-based learning tool for accessible, high-quality education.
+  </p>
+</div>
+<!-- Jumbotron -->
+
 <div>
-    Hello
-    <class="nav-item"><a class="nav-link" href="/upload">Upload</a>
+    <div class="row">
+        <div class="col-sm-6">
+          <h2>Our Purpose</h2>
+        </div>
+        <div class="col-sm-6">
+          <h2>How to contribute</h2>
+          <class="nav-item"><a class="nav-link" href="/upload">Upload</a>  
+        </div>
+      </div>
 </div>
 {% endblock %}
