@@ -11,9 +11,18 @@ Upload
     <input name="name" placeholder="Name" type="text" required>
     <input name="email" placeholder="Email" type="text" required>
     <input name="course_title" placeholder="Course Title" type="text" required>
-    {% for subject in subjects %}
-        <input name="subject" type="radio" value="{{ subject }}"> {{ subject }}
-    {% endfor %}
+  
+        <div class="custom-select">
+            <select name="subject">
+                <option disabled selected value=""> Select Subject </option>
+                {% for subject in subjects %}
+                <option value="{{ subject }}"> {{ subject }}</option>
+                {% endfor %}
+            </select>
+        </div>
+  
+    
+
     <input name="description" placeholder="Description" type="text" required>
     <input name="syllabus" placeholder="Syllabus" type="text" required>
     <input name="pset" placeholder="Problem Set" type="text">

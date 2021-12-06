@@ -24,13 +24,14 @@ app.config["TEMPLATES_AUTO_RELOAD"] = True
 # Session(app)
 
 #Configure mail 
-# app.config['MAIL_SERVER']='smtp.gmail.com'
-# app.config['MAIL_PORT'] = 465
-# app.config['MAIL_USERNAME'] = "hellovirtualed@gmail.com"
-# app.config['MAIL_PASSWORD'] = "victualed"
-# app.config['MAIL_USE_TLS'] = False
-# app.config['MAIL_USE_SSL'] = True
-# mail = Mail(app)
+app.config['MAIL_SERVER']='smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = "hellovirtualed@gmail.com"
+app.config['MAIL_PASSWORD'] = "virtualed"
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+mail = Mail(app)
+# flask-mail.Mail(app = None)
 
 app.config['ENV'] = 'development'
 app.config['DEBUG'] = True
@@ -88,28 +89,30 @@ def upload():
         syllabus = request.form.get("syllabus")
 
 
-        # # Validate name
-        # if not name:
-        #     return render_template("apology.html", message="Missing name")
-        # # Validate email
-        # if not email:
-        #     return render_template("apology.html", message="Missing email")
-        # if not course_title or not subject or not description or not syllabus:
-        #     return render_template("apology.html", message="Missing required course materials")
+        # Validate name
+        if not name:
+            return render_template("apology.html", message="Missing name")
+        # Validate email
+        if not email:
+            return render_template("apology.html", message="Missing email")
+        if not course_title or not subject or not description or not syllabus:
+            return render_template("apology.html", message="Missing required course materials")
     
         # # Add submission to SQL
-        # # db.execute("INSERT INTO uploads (name, email, course_title, subject, description, syllabus) VALUES (?, ?, ?, ?, ?, ?)", name, email, course_title, subject, description, syllabus)
+        #db.execute("INSERT INTO uploads (name, email, course_title, subject, description, syllabus) VALUES (?, ?, ?, ?, ?, ?)", name, email, course_title, subject, description, syllabus)
 
         # # Send email to the user when upload is successful
-        # # message = Message("Your upload was successful. Thank you for your submission!", sender = "hellovirtualed@gmail.com", recipients=[email])
-        # # message.body = "This is the email body sending with flask!"
-        # # mail.send(message)
+        print(email)
+        print(type(email))
+        message = Message('VirtualEd Upload', sender = 'hellovirtualed@gmail.com', recipients=[email])
+        message.body = "Your upload was successful. Thank you for your submission!"
+        mail.send(message)
 
         # # Confirm submission
         return render_template("success.html")
 
     else:
-        return render_template("upload.html")
+        return render_template("upload.html", subjects=subjects)
 
 
 @app.route("/contact", methods=["POST", "GET"])
@@ -120,9 +123,10 @@ def contact():
         email_message = request.form.get("email_message")
         if not name or not email or not email_message:
             return render_template("apology.html")
-
-        # message = Message(email_message, sender = "hellovirtualed@gmail.com", recipients=["hchen@college.harvard.edu"])
-        # mail.send(message)
+        message = Message('Contact', sender = 'hellovirtualed@gmail.com', recipients=['hchen@college.harvard.edu'])
+        message.body = email_message
+        mail.send(message)
+        return render_template("success.html")
     else:
         return render_template("contact.html")
 
