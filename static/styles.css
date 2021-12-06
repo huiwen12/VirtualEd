@@ -39,3 +39,16 @@ nav .navbar-brand .green
 {
     color: #2e944b;
 }
+
+nav ul {
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+}
+
+#page_wrapper {
+    width: 100%;
+    max-width: 1024px;
+    margin: 0 auto;
+}

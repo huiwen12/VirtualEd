@@ -130,7 +130,12 @@ def contact():
     else:
         return render_template("contact.html")
 
-
+@app.route("/learn", methods=["POST", "GET"])
+def learn():
+    if request.method == "POST":
+        return render_template("content.html")
+    else:
+        return render_template("content.html")
 # def errorhandler(e):
 #     """Handle error"""
 #     if not isinstance(e, HTTPException):
