@@ -10,4 +10,3 @@ $ export FLASK_ENV=development
 $ flask run
 
 The website should run on a local host. 
-
