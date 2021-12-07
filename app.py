@@ -5,9 +5,6 @@ import re
 from cs50 import SQL
 from flask import Flask, redirect, render_template, request
 from flask_mail import Mail, Message
-# from tempfile import mkdtemp
-# from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
-# from werkzeug.security import check_password_hash, generate_password_hash
 from helpers import apology
 
 
@@ -83,15 +80,10 @@ def upload():
         other = request.form.get("other")
 
 
-        # Validate name
-        if not name:
-            return render_template("apology.html", message="Missing name")
-        # Validate email
-        if not email:
-            return render_template("apology.html", message="Missing email")
-        if not course_title or not subject or not description or not syllabus:
-            return render_template("apology.html", message="Missing required course materials")
-    
+        # Validate user input
+        if not name or not email or not course_title or not subject or not description or not syllabus:
+            return render_template("apology.html")
+       
         # # Add submission to SQL
         db.execute("INSERT INTO uploads (name, email, course_title, subject, description, syllabus, pset, other) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", 
             name, email, course_title, subject, description, syllabus, pset, other)
@@ -111,6 +103,8 @@ def upload():
 @app.route("/contact", methods=["POST", "GET"])
 def contact():
     if request.method == "POST":
+
+        # Store the responses in variables
         name = request.form.get("name")
         email = request.form.get("email")
         email_message = request.form.get("email_message")
@@ -120,8 +114,8 @@ def contact():
             return render_template("apology.html")
 
         # Auto send a contact email through Flask mail
-        message = Message('VirtualEd Contact', sender = 'hellovirtualed@gmail.com', recipients=['contactvirtualed@gmail.com'])
-        message.body = email_message + "\nSENT FROM: " + email
+        message = Message('VirtualEd Contact From ' + name, sender = 'hellovirtualed@gmail.com', recipients=['contactvirtualed@gmail.com'])
+        message.body = email_message + "\nSENT FROM: " + email 
         mail.send(message)
 
         # Confirm successful submission

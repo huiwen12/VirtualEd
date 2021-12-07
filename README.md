@@ -27,3 +27,14 @@ The website should run on a local host.
 
 # YOUTUBE LINK - website walkthrough
 https://youtu.be/sB6NhZ08MvY
+
+
+To use the web application:
+ 
+* Our Home page displays the purpose of the website and the link to upload course materials to our platform. This page has a description of our prupose to allow users to learn more about the motivation behind our platform.
+ 
+* To navigate the educational resources available on VirtualEd, go to the Learn page and search for educational content by subject. If site users have uploaded course materials for the selected subject, the page will render the content in a card format. Sample course materials have been added to Math, Other, and Social Sciences. Clicking the button on each card will redirect the user to the corresponding course site.
+ 
+* Site users can upload new course materials through the form on the Upload page. The mission of our website is to be an interactive learning platform where users can share their educational resources to make education more accessible, so we appreciate any course uploads from our users, as their contributions can increase the number of educational content on VirtualEd. After submitting the upload form, the user will be redirected to a page that confirms the successful submission and receive an email confirmation from hellovirtualed@gmail.com.
+ 
+* The creators of VirtualEd can be reached by email when site users submit the contact form on our Contact page. The email message and contact information of the user will be sent to contactvirtualed@gmail.com.

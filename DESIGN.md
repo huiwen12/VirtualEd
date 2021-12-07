@@ -1,3 +1,6 @@
+# app.py
+We used Flask and Flask-Mail to build our project. Before implementing functions on app.py, we imported libraries that are relevant to our project and configured the mail to send using SSL. We also made a db file called upload.db to store the upload materials.
+
 # HOMEPAGE
 
 For the homepage of our project, we wanted to include a large jumbotron-like banner to capture the attention of the user and garner 
@@ -11,6 +14,13 @@ Thus, we wanted to make the phrase front and center. Using bootstrap classes and
 Next, we wanted the user to be able to learn more about VirtualEd and encourage them to contribute to our repository of course materials. This called for a 2-column format, to split the user’s attention. We used the bootstrap classes “row” and nested div’s of class “col-sm-6” to achieve a 2-column format. In one column, we described our purpose. In the other column, we used an href link to link to the upload page so that users could begin contributing course materials.
 
 # UPLOAD
+The upload page is where users can submit new course materials to be displayed on our learn page. We built a form using Flask that allows users to upload their educational content to share with other users on our platform. This form first asks the users for their name and email address, which can be used to contact the user if we have questions about their upload and to send them an email confirmation after their successful submission. For the course content, we display the following input fields on the page: Course Title, Subject, Description, Syllabus, Problem Set, and Other Materials. We require all input fields other than Problem Set and Other Materials because problem sets might not be relevant to humanities courses but are often needed for STEM courses. To easily change the subject options in the event that we want to modify the subject, we decided to create a list of subjects in app.py. Using Jinga on upload.html, we created a for loop that displays each element in the list of subjects as an option on the dropdown menu for the subject. When the user reaches the site through a GET method, the upload page will render with subjects=subjects for the correct options to show up on the dropdown menu. 
+
+When the user clicks the submit button to submit the upload form, that is a POST request to the upload page. On app.py, we store the user input for each input field as a variable. Next, we added logic to validate the user responses to ensure that the 6 required fields are submitted. Pset and other are optional materials on the upload form, so we don’t need to validate those input fields. If the user attempts to submit the upload form without filling out all required fields, the page will return apology.html, which is an error message informing the user that the content has not been submitted. 
+
+Once the validation goes through, we used a SQL query in python to store user input in the table called “uploads.” The variables we created to store each input will be inserted into corresponding columns on the “uploads” table. 
+
+To confirm the submission, we have used Flask-Mail to programmatically send an email to the user if the submission is successful. The email is sent from hellovirtualed@gmail.com to the user’s email, which is the email in the email input field. The email subject is “VirtualEd Upload” and the body message “Your upload was successful. Thank you for your submission!” informs the user that we have received their submission and the uploaded content is also displayed on 
 
 # LEARN
 For the learn page, we wanted to let the users search the content by subject. This is to accommodate growth in usage. If we had 
@@ -39,3 +49,6 @@ link, pset link, other materials link, and contact information of the user who u
 
 # CONTACT
 
+We would like to provide the user with a way to reach us in case they have any inquiries. The contact page displays a contact form in which the user can submit their name, email, and a message to us. We stored the user input for each field as a variable because we will use the information in app.py. If the user reaches the site via GET request, they will see the contact form. 
+
+When the user submits the contact form, the backend code validates the responses to ensure that all three input fields (name, email, and message) have been filled out. If the responses are valid, we will programmatically send an email from hellovirtualed@gmail.com to our contact email contactvirtualed@gmail.com. The email has a subject titled “VirtualEd Contact From ….” where the name after “From” is the name of the user. The email body includes the email message from the user as well as their email contact information, which allows us to reply to the user through their email address. Lastly, the user will see the success.html page, which confirms that the user has successfully contacted us. 
