@@ -77,13 +77,15 @@ def home():
 @app.route("/upload", methods=["GET", "POST"])
 def upload():
     if request.method == "POST":
-        # Valid submission
+        # Variables for submissions
         name = request.form.get("name")
         email = request.form.get("email")
         course_title = request.form.get("course_title")
         subject = request.form.get("subject")
         description = request.form.get("description")
         syllabus = request.form.get("syllabus")
+        pset = request.form.get("pset")
+        other = request.form.get("other")
 
 
         # Validate name
@@ -96,11 +98,9 @@ def upload():
             return render_template("apology.html", message="Missing required course materials")
     
         # # Add submission to SQL
-        db.execute("INSERT INTO upload (name, email, course_title, subject, description, syllabus) VALUES (?, ?, ?, ?, ?, ?)", name, email, course_title, subject, description, syllabus)
+        db.execute("INSERT INTO upload (name, email, course_title, subject, description, syllabus, pset, other) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", name, email, course_title, subject, description, syllabus, pset, other)
 
         # # Send email to the user when upload is successful
-        print(email)
-        print(type(email))
         message = Message('VirtualEd Upload', sender = 'hellovirtualed@gmail.com', recipients=[email])
         message.body = "Your upload was successful. Thank you for your submission!"
         mail.send(message)
@@ -111,19 +111,26 @@ def upload():
     else:
         return render_template("upload.html", subjects=subjects)
 
-
+# Allow user to contact us
 @app.route("/contact", methods=["POST", "GET"])
 def contact():
     if request.method == "POST":
         name = request.form.get("name")
         email = request.form.get("email")
         email_message = request.form.get("email_message")
+
+        # Ensure that the user inputs valid information
         if not name or not email or not email_message:
             return render_template("apology.html")
-        message = Message('Contact', sender = 'hellovirtualed@gmail.com', recipients=['hchen@college.harvard.edu'])
+        
+        # Auto send a contact email through Flask mail
+        message = Message('VirtualEd Contact', sender = 'hellovirtualed@gmail.com', recipients=['hchen@college.harvard.edu'])
         message.body = email_message
         mail.send(message)
+
+        # Confirm successful submission
         return render_template("success.html")
+
     else:
         return render_template("contact.html")
 
