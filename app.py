@@ -137,38 +137,40 @@ def contact():
 @app.route("/learn", methods=["POST", "GET"])
 def learn():
     """Query content by topic."""
+
+    # User reached route via submitting to the /learn page
     if request.method == "POST":
+
+        # If user did not submit a subject for any reason, return an error
         if not request.form.get("subject"):
             return apology("no subject submitted", 400)
         
+        # Query courses that are of a certain subject
         uploads = db.execute("SELECT * FROM uploads WHERE subject = ?", request.form.get("subject"))
 
+        # Render subject page to display all courses of a subject
         return render_template("subject.html", uploads=uploads, subject=request.form.get("subject"))
+
     else:
         # User reached route via GET (as by clicking a link or via redirect)
         return render_template("learn.html", subjects=subjects)
 
-@app.route("/content", methods=["POST", "GET"])
+@app.route("/content", methods=["POST"])
 def content():
     """Get content."""
+    
+    # User reached route via submitting to the /content page
     if request.method == "POST":
+
+        # If user did not submit a course id for any reason, return an error
         if not request.form.get("id"):
             return apology("no course submitted", 400)
-        
-        print("HELLO!!!!")
 
+        # Find course by inputted id, return all related information
         content = db.execute("SELECT * FROM uploads WHERE id = ?", request.form.get("id"))
-        print(content)
 
+        # Render content page to display all materials of a course
         return render_template("content.html", content=content[0])
-    else:
-        content = db.execute("SELECT * FROM uploads WHERE id = ?", request.form.get("id"))
-       
-
-        return render_template("subject.html", content=content[0])
-        
-        # User reached route via GET (as by clicking a link or via redirect)
-        # return render_template("learn.html", subjects=subjects)
 
 # def errorhandler(e):
 #     """Handle error"""
