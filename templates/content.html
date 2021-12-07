@@ -5,9 +5,32 @@ Learn
 {% endblock %}
 
 {% block main %}
-<h1>Content</h1>
 
-<p>[Insert Course Title Name here as input]]</p>
+<h1>{{ content['course_title'] }}</h1>
+<p>{{ content['subject']}}</p>
 
-[display materials]
+<div class="content_body">
+
+    <h3>Description</h3>
+    <p class="brmedium"> {{ content['description']}} </p>
+    
+    <h3>Syllabus</h3>
+    <p class="brmedium"> {{ content['syllabus']}} </p>
+
+    <h3>Psets</h3>
+    <p class="brmedium"> {{ content['pset']}} </p>
+
+    <h3>Other Course Materials</h3>
+    <p class="brmedium"> {{ content['other']}} </p>
+
+</div>
+
+<br>
+
+<div>
+    To learn more, contact the individual who uploaded these materials: <br>
+    Name: {{ content['name']}} <br>
+    Email: {{ content['email']}} <br>
+</div>
+
 {% endblock %}

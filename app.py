@@ -48,8 +48,8 @@ subjects = [
     "Language",
     "Life Sciences",
     "Mathematics",
-    "Social Sciences"
-    "Physica Sciences",
+    "Social Sciences",
+    "Physical Sciences",
     "Other"  
 ]
  
@@ -98,7 +98,7 @@ def upload():
             return render_template("apology.html", message="Missing required course materials")
     
         # # Add submission to SQL
-        db.execute("INSERT INTO upload (name, email, course_title, subject, description, syllabus, pset, other) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", name, email, course_title, subject, description, syllabus, pset, other)
+        db.execute("INSERT INTO uploads (name, email, course_title, subject, description, syllabus, pset, other) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", name, email, course_title, subject, description, syllabus, pset, other)
 
         # # Send email to the user when upload is successful
         message = Message('VirtualEd Upload', sender = 'hellovirtualed@gmail.com', recipients=[email])
@@ -136,18 +136,39 @@ def contact():
 
 @app.route("/learn", methods=["POST", "GET"])
 def learn():
+    """Query content by topic."""
+    if request.method == "POST":
+        if not request.form.get("subject"):
+            return apology("no subject submitted", 400)
+        
+        uploads = db.execute("SELECT * FROM uploads WHERE subject = ?", request.form.get("subject"))
+
+        return render_template("subject.html", uploads=uploads, subject=request.form.get("subject"))
+    else:
+        # User reached route via GET (as by clicking a link or via redirect)
+        return render_template("learn.html", subjects=subjects)
+
+@app.route("/content", methods=["POST", "GET"])
+def content():
     """Get content."""
     if request.method == "POST":
-        if not request.form.get("symbol"):
-            return apology("no symbol submitted", 400)
+        if not request.form.get("id"):
+            return apology("no course submitted", 400)
         
-        uploads = db.execute("SELECT * FROM uploads WHERE course_title = ?", request.form.get("course_title"))
+        print("HELLO!!!!")
 
-        return render_template("content.html", uploads=uploads)
+        content = db.execute("SELECT * FROM uploads WHERE id = ?", request.form.get("id"))
+        print(content)
+
+        return render_template("content.html", content=content[0])
     else:
-        return render_template("learn.html")
+        content = db.execute("SELECT * FROM uploads WHERE id = ?", request.form.get("id"))
+       
 
-
+        return render_template("subject.html", content=content[0])
+        
+        # User reached route via GET (as by clicking a link or via redirect)
+        # return render_template("learn.html", subjects=subjects)
 
 # def errorhandler(e):
 #     """Handle error"""

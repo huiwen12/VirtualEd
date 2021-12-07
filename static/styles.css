@@ -52,3 +52,17 @@ nav ul {
     max-width: 1024px;
     margin: 0 auto;
 }
+
+.content_body {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    margin-left: 10%;
+    margin-right: 10%;
+    text-align: left;
+}
+
+.brmedium {
+    display: block;
+    margin-bottom: 1em;
+}

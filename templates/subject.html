@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Learn
+{% endblock %}
+
+{% block main %}
+<div>
+    <h2>All Courses in {{ subject }}</h2>
+    
+    {% for upload in uploads %}
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{upload['course_title']}}</h5>
+          <p class="card-text">{{upload['description']}}</p>
+          <form action="/content" method="post">
+            <input name="id" type="hidden" value="{{ upload['id'] }}">
+            <input type="submit" value="Learn More">
+        </form>
+        </div>
+    </div>
+
+    {% endfor %}
+
+</div>
+
+
+{% endblock %}
