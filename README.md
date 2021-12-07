@@ -24,3 +24,6 @@ To run our project using Visual Studio Code:
     $ flask run
     
 The website should run on a local host.
+
+# YOUTUBE LINK - website walkthrough
+https://youtu.be/sB6NhZ08MvY
