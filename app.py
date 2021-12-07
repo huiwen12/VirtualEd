@@ -3,11 +3,11 @@ import time
 import re
 
 from cs50 import SQL
-from flask import Flask, flash, redirect, render_template, request
+from flask import Flask, redirect, render_template, request
 from flask_mail import Mail, Message
-from tempfile import mkdtemp
-from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
-from werkzeug.security import check_password_hash, generate_password_hash
+# from tempfile import mkdtemp
+# from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
+# from werkzeug.security import check_password_hash, generate_password_hash
 from helpers import apology
 
 
@@ -18,11 +18,6 @@ app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
 
-# # Configure session to use filesystem (instead of signed cookies)
-# app.config["SESSION_PERMANENT"] = False
-# app.config["SESSION_TYPE"] = "filesystem"
-# Session(app)
-
 #Configure mail 
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
@@ -31,7 +26,7 @@ app.config['MAIL_PASSWORD'] = "virtualed"
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
-# flask-mail.Mail(app = None)
+
 
 app.config['ENV'] = 'development'
 app.config['DEBUG'] = True
@@ -172,15 +167,3 @@ def content():
 
         # Render content page to display all materials of a course
         return render_template("content.html", content=content[0])
-
-# def errorhandler(e):
-#     """Handle error"""
-#     if not isinstance(e, HTTPException):
-#         e = InternalServerError()
-#     return apology(e.name, e.code)
-
-
-# # Listen for errors
-# for code in default_exceptions:
-#     app.errorhandler(code)(errorhandler)
-
