@@ -38,10 +38,7 @@ app.config['DEBUG'] = True
 app.config['TESTING'] = True
 
 # add db file
-
-# Make sure API key is set
-# if not os.environ.get("API_KEY"):
-#     raise RuntimeError("API_KEY not set")
+db = SQL("sqlite://upload.db")
 
 
 # List of subjects
@@ -99,7 +96,7 @@ def upload():
             return render_template("apology.html", message="Missing required course materials")
     
         # # Add submission to SQL
-        #db.execute("INSERT INTO uploads (name, email, course_title, subject, description, syllabus) VALUES (?, ?, ?, ?, ?, ?)", name, email, course_title, subject, description, syllabus)
+        db.execute("INSERT INTO upload (name, email, course_title, subject, description, syllabus) VALUES (?, ?, ?, ?, ?, ?)", name, email, course_title, subject, description, syllabus)
 
         # # Send email to the user when upload is successful
         print(email)
