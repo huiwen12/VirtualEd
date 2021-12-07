@@ -38,7 +38,7 @@ app.config['DEBUG'] = True
 app.config['TESTING'] = True
 
 # add db file
-db = SQL("sqlite://upload.db")
+db = SQL("sqlite:///upload.db")
 
 
 # List of subjects
