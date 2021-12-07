@@ -5,9 +5,23 @@ Learn
 {% endblock %}
 
 {% block main %}
-<h1>All Topics</h1>
+<div>
+    <h1>All Topics</h1>
 
-<p>[Sort by topic]</p>
+    <p>[Sort by topic]</p>
+    
+    {% for upload in uploads %}
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{upload['course_title']}}</h5>
+          <p class="card-text">{{upload['description']}}</p>
+          <form action="/learn" method="post">
+            <button class="btn btn-primary" type="submit">Learn more</button>
+        </form>
+        </div>
+    </div>
 
-[display materials]
+</div>
+
+
 {% endblock %}

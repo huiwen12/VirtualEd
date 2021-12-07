@@ -132,10 +132,19 @@ def contact():
 
 @app.route("/learn", methods=["POST", "GET"])
 def learn():
+    """Get content."""
     if request.method == "POST":
-        return render_template("content.html")
+        if not request.form.get("symbol"):
+            return apology("no symbol submitted", 400)
+        
+        uploads = db.execute("SELECT * FROM uploads WHERE course_title = ?", request.form.get("course_title"))
+
+        return render_template("content.html", uploads=uploads)
     else:
-        return render_template("content.html")
+        return render_template("learn.html")
+
+
+
 # def errorhandler(e):
 #     """Handle error"""
 #     if not isinstance(e, HTTPException):
