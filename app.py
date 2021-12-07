@@ -98,7 +98,8 @@ def upload():
             return render_template("apology.html", message="Missing required course materials")
     
         # # Add submission to SQL
-        db.execute("INSERT INTO uploads (name, email, course_title, subject, description, syllabus, pset, other) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", name, email, course_title, subject, description, syllabus, pset, other)
+        db.execute("INSERT INTO uploads (name, email, course_title, subject, description, syllabus, pset, other) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", 
+            name, email, course_title, subject, description, syllabus, pset, other)
 
         # # Send email to the user when upload is successful
         message = Message('VirtualEd Upload', sender = 'hellovirtualed@gmail.com', recipients=[email])
@@ -122,7 +123,7 @@ def contact():
         # Ensure that the user inputs valid information
         if not name or not email or not email_message:
             return render_template("apology.html")
-        
+
         # Auto send a contact email through Flask mail
         message = Message('VirtualEd Contact', sender = 'hellovirtualed@gmail.com', recipients=['hchen@college.harvard.edu'])
         message.body = email_message
