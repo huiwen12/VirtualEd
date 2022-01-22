@@ -1,6 +1,6 @@
-#About
+# About
 VirtualEd is a Flask app project made by Huiwen Chen and Audrey Chang. This is a Flask web application that aims to increase the accessibility of high-quality education. VirtualEd lets users upload course materials and browse available educational resources; our application also generates emails.
-#To run our project using Visual Studio Code:
+# To run our project using Visual Studio Code:
  
 * Download Visual Studio Code and Python3 (or the latest version of Python) on the local computer
 * Install the SQLite extension created by alexcvzz and Python extension (if needed) on Visual Studio Code
