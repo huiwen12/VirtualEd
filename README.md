@@ -11,9 +11,9 @@ VirtualEd is a Flask app project made by Huiwen Chen and Audrey Chang. This is a
         ## $ . venv/bin/activate
         Refer to the instructions on https://flask.palletsprojects.com/en/2.0.x/installation/ 
 * Install cs50 in the terminal
-    # $ pip install cs50 
+    ## $ pip install cs50 
 * Install Flask-Mail in the terminal 
-    # $ pip install Flask-Mail 
+    ## $ pip install Flask-Mail 
     Refer to the instructions on https://pythonhosted.org/Flask-Mail/
 * If the commands above do not work, try:
    ## $ pip3 install cs50
