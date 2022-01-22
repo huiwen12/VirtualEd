@@ -7,8 +7,8 @@ VirtualEd is a Flask app project made by Huiwen Chen and Audrey Chang. This is a
 * Open the project on Visual Studio Code
 * Make sure that you have all the requirements listed in Requirements.txt. Follow the following steps if the requirements are not met: 
     * Configure Visual Studio Code to install Flask and activate the virtual environment in the terminal
-        $ pip install Flask
-        $ . venv/bin/activate
+        ##$ pip install Flask
+        ##$ . venv/bin/activate
         Refer to the instructions on https://flask.palletsprojects.com/en/2.0.x/installation/ 
 * Install cs50 in the terminal
     $ pip install cs50 
